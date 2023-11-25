@@ -153,6 +153,15 @@ body{
     align-items: center;
     padding: 6px;
     text-decoration: none;
+    position: relative;
+}
+.quantity{
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+    text-decoration: none;
+    color: yellow;
+    font-weight: bold;
 }
 .cart-text{
     color: white;
