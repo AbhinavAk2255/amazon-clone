@@ -338,3 +338,6 @@ body{
     height: 20px;
     margin-right: 5px;
 }
+.msg-added{
+    opacity: 1;
+}
