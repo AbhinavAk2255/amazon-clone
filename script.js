@@ -19,7 +19,7 @@ products.forEach((product) => {
             $${(product.priceCents / 100).toFixed(2)}
         </div>
         <div class="quantity">
-            <select class="selection-item" name="" id="">
+            <select class="selection-item js-quantity-selector-${product.id}" name="" id="">
                 <option selected value="1">1</option>
                 <option  value="2">2</option>
                 <option  value="3">3</option>
@@ -50,22 +50,23 @@ document.querySelector('.js-html-space').innerHTML = productHtml;
 document.querySelectorAll('.js-add-to-cart').forEach((buttons) => {
     buttons.addEventListener('click', () => {
         const productId = buttons.dataset.productId;
+        const valueSelection = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
+        console.log(valueSelection);
 
         let matchingItem;
 
         cart.forEach((item) => {
             if (productId === item.productId) {
                 matchingItem = item;
-                
             }
         });
         if (matchingItem) {
-            matchingItem.quantity += 1;
+            matchingItem.quantity += valueSelection;
         }
         else {
             cart.push({
                 productId : productId,
-                quantity : 1
+                quantity : valueSelection
             })
         }
 
