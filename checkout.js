@@ -1,5 +1,7 @@
 import { cart } from "./data/cart.js";
 import { products } from "./data/products.js";
+import { currencyfunc } from "./utils/money.js";
+
 
 let cartSummaryHtml = '';
 
@@ -25,7 +27,7 @@ cart.forEach((cartItem) => {
             <img class="image-item" src="${matchingProduct.image}" alt="">
             <div class="cart-item-details">
                 <div class="cart-item-name">${matchingProduct.name}</div>
-                <div class="cart-item-price">$${matchingProduct.priceCents/100}</div>
+                <div class="cart-item-price">$${currencyfunc(matchingProduct.priceCents)}</div>
                 <div>Quantity
                     <span>${cartItem.quantity}</span>
                     <span class="cart-item-update">Update</span>
@@ -35,7 +37,7 @@ cart.forEach((cartItem) => {
             <div class="decivery-details">
                 <div class="decivery-details-time">Choose a delivery option:</div>
                 <div class="delivery-grid">
-                    <input type="radio">
+                    <input type="radio" name="delivery-option-${matchingProduct.id}">
                     <div>
                         <div class="date-green">Tuesday, December 5
                         </div>
@@ -44,7 +46,7 @@ cart.forEach((cartItem) => {
 
                 </div>
                 <div class="delivery-grid">
-                    <input type="radio">
+                    <input type="radio" name="delivery-option-${matchingProduct.id}">
                     <div>
                         <div class="date-green">Wednesday, November 29
                         </div>
@@ -53,7 +55,7 @@ cart.forEach((cartItem) => {
 
                 </div>
                 <div class="delivery-grid">
-                    <input type="radio">
+                    <input type="radio" name="delivery-option-${matchingProduct.id}">
                     <div>
                         <div class="date-green">Monday, November 27
                         </div>
