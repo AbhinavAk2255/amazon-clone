@@ -82,9 +82,10 @@ body{
         display: block;
     }
 }
-.cartitem span{
+.cartitem a{
     color: #017cb6;
     font-weight: normal;
+    text-decoration: none;
 }
 
 .content-area{
@@ -163,6 +164,35 @@ body{
 }
 .cart-item-update:hover{
     color: red;
+}
+.quantity-input{
+    width: 35px;
+    cursor: pointer;
+    display: none;
+}
+.quantity-input:active{
+    border: 2px solid yellow;
+}
+.save-quantity-link{
+    color: #017cb6;
+    display: none;
+    cursor: pointer;
+}
+.save-quantity-link:hover{
+    color: red;
+}
+.is-editing-quantity .quantity-input {
+    display: initial;
+}
+.is-editing-quantity .save-quantity-link {
+    display: initial;
+}
+
+.is-editing-quantity .quantity-label{
+    display: none;
+}
+.is-editing-quantity .js-update-link{
+    display: none;
 }
 .cart-item-delete{
     color: #017cb6;
