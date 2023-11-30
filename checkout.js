@@ -8,8 +8,8 @@ const today = dayjs();
 const deliveryDate = today.add(7, 'days');
 deliveryDate.format('dddd, mmmm D');
 
-
-let cartSummaryHtml = '';
+function renderOrderSummary() {
+    let cartSummaryHtml = '';
 
 cart.forEach((cartItem) => {
     const productId = cartItem.productId;
@@ -105,6 +105,7 @@ document.querySelectorAll('.js-delivery-option').forEach((element) => {
         const productId = element.dataset.productId;
         const deliveryOptionId = element.dataset.deliveryOptionId;
         updateDeliveryOption(productId, deliveryOptionId);
+        renderOrderSummary();
     });
 });
 
@@ -140,6 +141,10 @@ document.querySelectorAll('.save-quantity-link').forEach((link3) => {
     });
 });
 updateCartQuantity();
+}
+
+renderOrderSummary();
+
 
 function updateCartQuantity() {
     const cartQuantity = CalculateCartQuantity();
