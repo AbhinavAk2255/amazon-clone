@@ -77,3 +77,17 @@ export function changeQuantity(productId,newQuantity) {
 
     addStorage();
 }
+
+
+export function updateDeliveryOption(productId, deliveryOptionId) {
+    let matchingItem;
+    cart.forEach((item) => {
+        if (productId === item.productId) {
+            matchingItem = item;
+            
+        }
+    });
+    matchingItem.deliveryOptionId = deliveryOptionId;
+
+    addStorage();
+}

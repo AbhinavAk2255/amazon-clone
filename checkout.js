@@ -1,4 +1,4 @@
-import { CalculateCartQuantity, cart , removeFromCart,changeQuantity} from "./data/cart.js";
+import { CalculateCartQuantity, cart , removeFromCart,changeQuantity,updateDeliveryOption} from "./data/cart.js";
 import { products } from "./data/products.js";
 import { currencyfunc } from "./utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
@@ -32,7 +32,7 @@ cart.forEach((cartItem) => {
         }
     });
     const today = dayjs();
-    const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
+    const deliveryDate = today.add(deliveryOption.deliveryDays,'days');
     const dateString = deliveryDate.format('dddd ,MMMM D');
 
     cartSummaryHtml += `
@@ -65,14 +65,15 @@ cart.forEach((cartItem) => {
 
 function deliveryOptionHtml(matchingProduct,cartItem) {
     let html = '';
-    deliveryOptions.forEach((option) => {
+    deliveryOptions.forEach((deliveryOption) => {
         const today = dayjs();
-        const deliveryDate = today.add(option.deliveryDays, 'days');
+        const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
+        console.log(deliveryDate);
         const dateString = deliveryDate.format('dddd ,MMMM D');
-        const priceCal = option.priceCents === 0 ? 'FREE ' : `$${currencyfunc(option.priceCents)} - `;
-        const isChecked = option.id === cartItem.deliveryOptionId;
+        const priceCal = deliveryOption.priceCents === 0 ? 'FREE ' : `$${currencyfunc(deliveryOption.priceCents)} - `;
+        const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
         html += `
-            <div class="delivery-grid">
+            <div class="delivery-grid js-delivery-option" data-product-id="${matchingProduct.id}" data-delivery-option-id="${deliveryOption.id}">
                 <input type="radio" ${isChecked ? 'checked' : ''} name="delivery-option-${matchingProduct.id}">
                 <div>
                     <div class="date-green">${dateString}</div>
@@ -97,7 +98,15 @@ document.querySelectorAll('.js-delete-link').forEach((link) => {
         container.remove();
         updateCartQuantity();
     });
-})
+});
+
+document.querySelectorAll('.js-delivery-option').forEach((element) => {
+    element.addEventListener('click', () => {
+        const productId = element.dataset.productId;
+        const deliveryOptionId = element.dataset.deliveryOptionId;
+        updateDeliveryOption(productId, deliveryOptionId);
+    });
+});
 
 document.querySelectorAll('.js-update-link').forEach((link1) => {
     link1.addEventListener('click', () => {
@@ -130,7 +139,6 @@ document.querySelectorAll('.save-quantity-link').forEach((link3) => {
 
     });
 });
-
 updateCartQuantity();
 
 function updateCartQuantity() {
