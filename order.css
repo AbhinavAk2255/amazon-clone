@@ -1,0 +1,186 @@
+body{
+    margin: 0;
+    font-family: Arial;
+
+}
+
+.order-main{
+    max-width: 850px;
+    margin-top: 90px;
+    margin-bottom: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.full-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 50px;
+}
+.order-header{
+    font-weight: bold;
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+.order-area{
+    display: flex;
+    flex-direction: column;
+    
+
+}
+.order-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border: 1px solid rgb(213, 217, 217);
+    background-color: rgb(240, 242, 242);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    
+
+}
+.left-section-order{
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+}
+.left-section-order .order-date,.Total{
+    margin-bottom: 3px;
+    font-weight: 600;
+
+}
+.order-placed{
+    margin-right: 45px;
+}
+.right-section-order .id-order{
+    margin-bottom: 3px;
+    font-weight: 600;
+}
+.order-area .order-placed, 
+.order-area .total-price{
+    margin-right: 45px;
+}
+.order-area .order-details-grid{
+    display: grid;
+    grid-template-columns: 110px 1fr 220px;
+    column-gap: 35px;
+    row-gap: 60px;
+    padding: 40px 25px;
+    border: 1px solid rgb(213, 217, 217);
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    align-items: center;
+    border-top: 0;
+}
+.order-details .name{
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.arrival-date{
+    margin-bottom: 3px;
+}
+.arrival{
+    margin-bottom: 8px;
+}
+.buy{
+    font-size: 15px;
+    width: 140px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(33, 33, 33);
+    background-color: rgb(255, 216, 20);
+    border: 1px solid rgb(252, 210, 0);
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+    margin-top: 6px;
+}
+.buy img{
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    
+}
+.track-button{
+    align-self: start;
+}
+.track{
+    width: 100%;
+    font-size: 15px;
+    padding: 8px;
+    color: rgb(33, 33, 33);
+    background: white;
+    border: 1px solid #D5D9D9;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+
+}
+
+.oder-image .image-item{
+    max-width: 110px;
+    max-height: 110px;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (max-width:800px) {
+    .order-area .order-details-grid{
+        grid-template-columns: 110px 1fr;
+        row-gap: 0;
+        padding-bottom: 8px;
+    }
+
+    .order-details-grid .track-button{
+        grid-column: 2;
+        margin-bottom: 30px;
+
+    }
+    .track-button .track{
+        width: 140px;
+        /* padding: 8px; */
+        margin-top: 10px;
+        
+    }
+}
+@media (max-width:575px) {
+    .full-container .order-top{
+        flex-direction: column;
+        align-items: start;
+        line-height: 23px;
+        padding: 15px;
+    }
+    .order-top .left-section-order{
+        flex-direction: column;
+        
+    }
+    .left-section-order .order-placed{
+        display: grid;
+        grid-template-columns: auto 1fr;
+        margin-right: 0;
+    }
+    .left-section-order .total-price{
+        display: grid;
+        grid-template-columns: auto 1fr;
+        margin-right: 0;
+    }
+    .right-section-order .order-Id{
+        display: grid;
+        grid-template-columns: auto 1fr;
+        margin-right: 0;
+    }
+    .order-placed .order-date{
+        margin-right: 6px;
+    }
+    .total-price .Total{
+        margin-right: 6px;
+    }
+    .order-Id .id-order{
+        margin-right: 6px;
+    }
+}

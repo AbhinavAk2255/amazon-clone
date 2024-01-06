@@ -2,8 +2,21 @@ import { CalculateCartQuantity, cart , removeFromCart,changeQuantity,updateDeliv
 import { products,getProduct } from "../data/products.js";
 import { currencyfunc } from "../utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-import { deliveryOptions, getDeliveryOption } from "../data/deliveryOption.js";
+import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from "../data/deliveryOption.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
+import { renderCheckoutHeader } from "./checkoutHeader.js";
+
+// const today = dayjs();
+// const before = today.subtract(1, 'month');
+// const days = today.add(7 , 'dyas');
+// const formatday = days.format('dddd');
+// console.log(formatday);
+// console.log(today.format('dddd'));
+
+
+// let date = dayjs();
+// console.log(date.format('dddd, MMMM D'));
+// console.log(isWeekend(date));
 
 
 export function renderOrderSummary() {
@@ -18,14 +31,12 @@ export function renderOrderSummary() {
 
         let deliveryOption = getDeliveryOption(deliveryOptionId);
 
-        const today = dayjs();
-        const deliveryDate = today.add(deliveryOption.deliveryDays,'days');
-        const dateString = deliveryDate.format('dddd ,MMMM D');
+        calculateDeliveryDate(deliveryOption);
 
         cartSummaryHtml += `
         <section class="cart-area-main js-cart-area-main-${matchingProduct.id}">
             <div class="cart-area">
-                <div class="delivery-date">Delivery date: ${dateString}</div>
+                <div class="delivery-date">Delivery date: ${calculateDeliveryDate(deliveryOption)}</div>
             </div>
             <div class="cart-item-grid-area">
                 <img class="image-item" src="${matchingProduct.image}" alt="">
@@ -53,16 +64,15 @@ export function renderOrderSummary() {
     function deliveryOptionHtml(matchingProduct,cartItem) {
         let html = '';
         deliveryOptions.forEach((deliveryOption) => {
-            const today = dayjs();
-            const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
-            const dateString = deliveryDate.format('dddd ,MMMM D');
+            calculateDeliveryDate(deliveryOption);
+
             const priceCal = deliveryOption.priceCents === 0 ? 'FREE ' : `$${currencyfunc(deliveryOption.priceCents)} - `;
             const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
             html += `
                 <div class="delivery-grid js-delivery-option" data-product-id="${matchingProduct.id}" data-delivery-option-id="${deliveryOption.id}">
                     <input type="radio" ${isChecked ? 'checked' : ''} name="delivery-option-${matchingProduct.id}">
                     <div>
-                        <div class="date-green">${dateString}</div>
+                        <div class="date-green">${calculateDeliveryDate(deliveryOption)}</div>
                         <div class="shipping">${priceCal}Shipping</div>
                     </div>
 
@@ -80,9 +90,8 @@ export function renderOrderSummary() {
             // console.log(productId);
             removeFromCart(productId);
 
-            const container = document.querySelector(`.js-cart-area-main-${productId}`);
-            container.remove();
-            updateCartQuantity();
+            renderOrderSummary();
+            renderCheckoutHeader();
             renderPaymentSummary();
         });
     });
@@ -124,20 +133,25 @@ export function renderOrderSummary() {
             quantityLabel.innerHTML = quantityInput;
 
 
-            updateCartQuantity();
+            renderCheckoutHeader();
             renderPaymentSummary();
+            
 
         });
 
     });
-    updateCartQuantity();
+    renderCheckoutHeader();
+    
+    
+
+
 }
 
 
 
 
-function updateCartQuantity() {
-    const cartQuantity = CalculateCartQuantity();
-    document.querySelector('.js-cart-item-quantity')
-        .innerHTML = `${cartQuantity} items`;
-}
+// function updateCartQuantity() {
+//     const cartQuantity = CalculateCartQuantity();
+//     document.querySelector('.js-cart-item-quantity')
+//         .innerHTML = `${cartQuantity} items`;
+// }

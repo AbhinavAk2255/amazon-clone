@@ -91,3 +91,11 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
 
     addStorage();
 }
+
+// export function emptyCheck() {
+//     cart.forEach((item) => {
+//         if (!item) {
+//             document.querySelector('.js-empty').classList.add('js-empty-area');
+//         }
+//     })
+// }

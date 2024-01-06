@@ -6,7 +6,9 @@ import { currencyfunc } from "../utils/money.js";
 export function renderPaymentSummary() {
     let priceTotal = 0;
     let shippingPrice = 0;
+    let quantity = 0;
     cart.forEach((cartItem) => {
+        quantity += cartItem.quantity;
         const product = getProduct(cartItem.productId);
         priceTotal += product.priceCents * cartItem.quantity;
         
@@ -22,7 +24,7 @@ export function renderPaymentSummary() {
 
         <div class="order-summary">Order Summary</div>
         <div class="item-number">
-            <div>Items (2):</div>
+            <div>Items (${quantity}):</div>
             <div>
                 $${currencyfunc(priceTotal)}
             </div>
@@ -53,7 +55,7 @@ export function renderPaymentSummary() {
         </div>
 
         <div>
-            <button class="order-button">Place your order</button>
+        <a href="order.html"><button class="order-button">Place your order</button></a>
         </div>
 
     `;
