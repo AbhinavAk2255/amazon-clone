@@ -1,4 +1,4 @@
-import { currencyfunc } from "../utils/money.js";
+import { currencyfunc } from "../../utils/money.js";
 
 describe('testing case : currencyFunction', function(){
     it('convert ceents in to dollers', function () {
