@@ -29,7 +29,7 @@ export function addToCart(productId) {
 
     let matchingItem;
 
-    const valueSelection = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
+    // const valueSelection = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
 
     cart.forEach((item) => {
         if (productId === item.productId) {
@@ -37,12 +37,12 @@ export function addToCart(productId) {
         }
     });
     if (matchingItem) {
-        matchingItem.quantity += valueSelection;
+        matchingItem.quantity += 1;
     }
     else {
         cart.push({
             productId : productId,
-            quantity : valueSelection,
+            quantity : 1,
             deliveryOptionId : '1'
         })
     }

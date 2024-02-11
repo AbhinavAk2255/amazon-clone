@@ -34,7 +34,7 @@ export function renderOrderSummary() {
         calculateDeliveryDate(deliveryOption);
 
         cartSummaryHtml += `
-        <section class="cart-area-main js-cart-area-main-${matchingProduct.id}">
+        <section class="cart-area-main js-cart-area-main-${matchingProduct.id} js-cart-area-main">
             <div class="cart-area">
                 <div class="delivery-date">Delivery date: ${calculateDeliveryDate(deliveryOption)}</div>
             </div>
